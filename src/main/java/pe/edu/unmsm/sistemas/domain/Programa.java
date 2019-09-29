@@ -11,15 +11,70 @@ public class Programa {
   @Id
   @Column(name = "id_programa")
   @GeneratedValue(strategy = GenerationType.IDENTITY)
-  public Long id;
+  private Long id;
   @Column(name = "nom_programa")
-  public String nombrePrograma;
+  private String nombrePrograma;
   @Column(name = "sigla_programa")
-  public String siglaPrograma;
+  private String siglaPrograma;
   @Column(name = "vigencia_programa")
-  public Boolean vigenciaPrograma;
+  private Boolean vigenciaPrograma;
   @Column(name = "n_prioridad")
-  public Integer numeroPrioridad;
+  private Integer numeroPrioridad;
 
+
+  public Programa() {
+  }
+
+  public Programa(Long id, String nombrePrograma, String siglaPrograma, Boolean vigenciaPrograma, Integer numeroPrioridad) {
+    this.id = id;
+    this.nombrePrograma = nombrePrograma;
+    this.siglaPrograma = siglaPrograma;
+    this.vigenciaPrograma = vigenciaPrograma;
+    this.numeroPrioridad = numeroPrioridad;
+  }
+
+  public Long getId() {
+    return this.id;
+  }
+
+  public void setId(Long id) {
+    this.id = id;
+  }
+
+  public String getNombrePrograma() {
+    return this.nombrePrograma;
+  }
+
+  public void setNombrePrograma(String nombrePrograma) {
+    this.nombrePrograma = nombrePrograma;
+  }
+
+  public String getSiglaPrograma() {
+    return this.siglaPrograma;
+  }
+
+  public void setSiglaPrograma(String siglaPrograma) {
+    this.siglaPrograma = siglaPrograma;
+  }
+
+  public Boolean isVigenciaPrograma() {
+    return this.vigenciaPrograma;
+  }
+
+  public Boolean getVigenciaPrograma() {
+    return this.vigenciaPrograma;
+  }
+
+  public void setVigenciaPrograma(Boolean vigenciaPrograma) {
+    this.vigenciaPrograma = vigenciaPrograma;
+  }
+
+  public Integer getNumeroPrioridad() {
+    return this.numeroPrioridad;
+  }
+
+  public void setNumeroPrioridad(Integer numeroPrioridad) {
+    this.numeroPrioridad = numeroPrioridad;
+  }
 
 }
