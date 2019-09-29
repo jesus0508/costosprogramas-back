@@ -9,6 +9,7 @@ import javax.persistence.Id;
 @Entity(name = "programa")
 public class Programa {
   @Id
+  @Column(name = "id_programa")
   @GeneratedValue(strategy = GenerationType.IDENTITY)
   public Long id;
   @Column(name = "nom_programa")

@@ -23,4 +23,8 @@ public class ProgramaController {
     Set<Programa> setProgramas = programaService.getAllProgramas();
     return setProgramas;
   }
+  // @GetMapping
+  // public String getAllProgramas() {
+  //   return "Hola mundo";
+  // }
 }
