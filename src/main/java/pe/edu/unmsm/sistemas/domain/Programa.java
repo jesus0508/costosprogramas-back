@@ -1,10 +1,13 @@
 package pe.edu.unmsm.sistemas.domain;
 
+import javax.persistence.CascadeType;
 import javax.persistence.Column;
 import javax.persistence.Entity;
 import javax.persistence.GeneratedValue;
 import javax.persistence.GenerationType;
 import javax.persistence.Id;
+import javax.persistence.JoinColumn;
+import javax.persistence.OneToOne;
 
 @Entity(name = "programa")
 public class Programa {
@@ -20,17 +23,21 @@ public class Programa {
   private Boolean vigenciaPrograma;
   @Column(name = "n_prioridad")
   private Integer numeroPrioridad;
-
+  @OneToOne(cascade = CascadeType.PERSIST)
+  @JoinColumn(name = "id_tip_grado")
+  private TipoGrado tipoGrado;
 
   public Programa() {
   }
 
-  public Programa(Long id, String nombrePrograma, String siglaPrograma, Boolean vigenciaPrograma, Integer numeroPrioridad) {
+  public Programa(Long id, String nombrePrograma, String siglaPrograma, Boolean vigenciaPrograma,
+      Integer numeroPrioridad, TipoGrado tipoGrado) {
     this.id = id;
     this.nombrePrograma = nombrePrograma;
     this.siglaPrograma = siglaPrograma;
     this.vigenciaPrograma = vigenciaPrograma;
     this.numeroPrioridad = numeroPrioridad;
+    this.tipoGrado = tipoGrado;
   }
 
   public Long getId() {
@@ -75,6 +82,14 @@ public class Programa {
 
   public void setNumeroPrioridad(Integer numeroPrioridad) {
     this.numeroPrioridad = numeroPrioridad;
+  }
+
+  public TipoGrado getTipoGrado() {
+    return this.tipoGrado;
+  }
+
+  public void setTipoGrado(TipoGrado tipoGrado) {
+    this.tipoGrado = tipoGrado;
   }
 
 }
