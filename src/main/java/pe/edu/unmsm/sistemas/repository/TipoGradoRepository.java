@@ -4,6 +4,6 @@ import org.springframework.data.repository.CrudRepository;
 
 import pe.edu.unmsm.sistemas.domain.TipoGrado;
 
-public interface TipoGradoRepository extends CrudRepository<TipoGrado, Long> {
+public interface TipoGradoRepository extends CrudRepository<TipoGrado, String> {
 
 }
