@@ -1,44 +1,34 @@
 package pe.edu.unmsm.sistemas.controller;
 
-import java.util.Set;
-
+import io.swagger.annotations.Api;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.http.HttpStatus;
 import org.springframework.http.ResponseEntity;
-import org.springframework.web.bind.annotation.CrossOrigin;
-import org.springframework.web.bind.annotation.GetMapping;
-import org.springframework.web.bind.annotation.PathVariable;
-import org.springframework.web.bind.annotation.RequestMapping;
-import org.springframework.web.bind.annotation.RestController;
-
-import io.swagger.annotations.Api;
+import org.springframework.web.bind.annotation.*;
 import pe.edu.unmsm.sistemas.domain.ProgramaCiclo;
 import pe.edu.unmsm.sistemas.service.ProgramaCicloService;
 
-@CrossOrigin
+import java.util.List;
+import java.util.Set;
+
 @RestController
+@CrossOrigin
 @Api(tags = "Programa Ciclos")
 @RequestMapping("/programa_ciclos")
 public class ProgramaCicloController {
 
-  @Autowired
-  ProgramaCicloService programaCicloService;
+    @Autowired
+    ProgramaCicloService programaCicloService;
 
-  @GetMapping
-  public ResponseEntity<Set<ProgramaCiclo>> getAllProgramaCiclos() {
-    Set<ProgramaCiclo> setProgramaCiclos = programaCicloService.getAllProgramaCiclos();
-    return new ResponseEntity<>(setProgramaCiclos, HttpStatus.OK);
-  }
+    @GetMapping
+    public ResponseEntity<Set<ProgramaCiclo>> getAllProgramaCiclos() {
+        Set<ProgramaCiclo> programaCiclos = programaCicloService.getAllProgramaCiclos();
+        return new ResponseEntity<>(programaCiclos, HttpStatus.OK);
+    }
 
-  // @GetMapping("/{id}")
-  // public ResponseEntity<ProgramaCiclo> getProgramaCiclo(@PathVariable Long id){
-  // ProgramaCiclo programaCiclo=programaCicloService.getProgramaCicloById(id);
-  // return new ResponseEntity<>(programaCiclo,HttpStatus.OK);
-  // }
-
-  @GetMapping("/{tipo_pago}")
-  public ResponseEntity<Set<ProgramaCiclo>> getProgramaCiclo(@PathVariable String tipo_pago) {
-    Set<ProgramaCiclo> setProgramaCiclos = programaCicloService.getAllProgramaCicloByTipoPago(tipo_pago);
-    return new ResponseEntity<>(setProgramaCiclos, HttpStatus.OK);
-  }
+    @GetMapping("/{tipo-grado}")
+    public ResponseEntity<List<ProgramaCiclo>> getProgramaCiclo(@PathVariable String tipoGrado) {
+        List<ProgramaCiclo> programaCiclos = programaCicloService.getAllProgramaCicloByTipoPago(tipoGrado);
+        return new ResponseEntity<>(programaCiclos, HttpStatus.OK);
+    }
 }

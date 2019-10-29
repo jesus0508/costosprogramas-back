@@ -1,13 +1,14 @@
 package pe.edu.unmsm.sistemas.service;
 
-import java.util.Set;
-
 import pe.edu.unmsm.sistemas.domain.ProgramaCiclo;
 
+import java.util.List;
+import java.util.Set;
+
 public interface ProgramaCicloService {
-  public Set<ProgramaCiclo> getAllProgramaCiclos();
+    Set<ProgramaCiclo> getAllProgramaCiclos();
 
-  public ProgramaCiclo getProgramaCicloById(Long id);
+    ProgramaCiclo getProgramaCicloById(Integer id);
 
-  public Set<ProgramaCiclo> getAllProgramaCicloByTipoPago(String id);
+    List<ProgramaCiclo> getAllProgramaCicloByTipoPago(String id);
 }

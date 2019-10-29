@@ -1,8 +1,8 @@
 package pe.edu.unmsm.sistemas.repository;
 
-import pe.edu.unmsm.sistemas.domain.Programa;
 import org.springframework.data.repository.CrudRepository;
+import pe.edu.unmsm.sistemas.domain.Programa;
 
-public interface ProgramaRepository extends CrudRepository<Programa, Long> {
+public interface ProgramaRepository extends CrudRepository<Programa, Integer> {
 
 }

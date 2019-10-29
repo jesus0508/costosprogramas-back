@@ -1,4 +1,4 @@
-package pe.edu.unmsm.sistemas.costos_programas_backend;
+package pe.edu.unmsm.sistemas;
 
 import org.junit.Test;
 import org.junit.runner.RunWith;

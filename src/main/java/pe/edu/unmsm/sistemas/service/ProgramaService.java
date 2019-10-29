@@ -1,9 +1,9 @@
 package pe.edu.unmsm.sistemas.service;
 
-import java.util.Set;
-
 import pe.edu.unmsm.sistemas.domain.Programa;
 
+import java.util.Set;
+
 public interface ProgramaService {
-  public Set<Programa> getAllProgramas();
+    Set<Programa> getAllProgramas();
 }
