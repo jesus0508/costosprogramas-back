@@ -6,7 +6,7 @@ import javax.persistence.*;
 public class Programa {
     @Id
     @Column(name = "id_programa")
-    @GeneratedValue(strategy = GenerationType.IDENTITY)
+    @GeneratedValue(strategy = GenerationType.AUTO)
     private Short id;
     @Column(name = "nom_programa")
     private String nombrePrograma;
@@ -16,7 +16,7 @@ public class Programa {
     private Boolean vigenciaPrograma;
     @Column(name = "n_prioridad")
     private Integer numeroPrioridad;
-    @OneToOne(cascade = CascadeType.PERSIST)
+    @ManyToOne(fetch = FetchType.EAGER)
     @JoinColumn(name = "id_tip_grado")
     private TipoGrado tipoGrado;
 

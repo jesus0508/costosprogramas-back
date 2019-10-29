@@ -7,7 +7,7 @@ import java.sql.Date;
 public class ProgramacionPago {
     @Id
     @Column(name = "id_programacion_pagos")
-    @GeneratedValue(strategy = GenerationType.IDENTITY)
+    @GeneratedValue(strategy = GenerationType.AUTO)
     private Integer id;
     @Column(name = "f_vigencia_ini")
     private Date fechaVigenciaInicio;

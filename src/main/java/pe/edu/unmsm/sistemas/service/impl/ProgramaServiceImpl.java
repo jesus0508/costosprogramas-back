@@ -20,4 +20,9 @@ public class ProgramaServiceImpl implements ProgramaService {
         programaRepository.findAll().forEach(programa -> programas.add(programa));
         return programas;
     }
+
+    @Override
+    public Programa getProgramaById(Short id) {
+        return programaRepository.findById(id).orElseThrow(() -> new RuntimeException());
+    }
 }

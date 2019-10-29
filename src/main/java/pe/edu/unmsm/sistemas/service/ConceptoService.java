@@ -7,5 +7,6 @@ import java.util.List;
 
 public interface ConceptoService {
     List<Concepto> getAllConceptos();
-    List<Concepto> getAllConceptosPresupuesto(List<Integer> conceptosId);
+
+    List<Concepto> getAllConceptosPresupuesto(List<Short> conceptosId);
 }

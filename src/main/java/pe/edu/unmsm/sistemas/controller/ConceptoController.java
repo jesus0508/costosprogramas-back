@@ -20,7 +20,7 @@ public class ConceptoController {
     ConceptoService conceptoService;
 
     @GetMapping
-    public ResponseEntity<List<Concepto>> getAllConceptosPresupuesto(@RequestParam("id") Optional<List<Integer>> conceptosId) {
+    public ResponseEntity<List<Concepto>> getAllConceptosPresupuesto(@RequestParam("id") Optional<List<Short>> conceptosId) {
         List<Concepto> conceptos;
         if (conceptosId.isPresent()) {
             conceptos = conceptoService.getAllConceptosPresupuesto(conceptosId.get());

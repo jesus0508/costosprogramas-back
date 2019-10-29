@@ -22,4 +22,9 @@ public class ProgramacionPagoServiceImpl implements ProgramacionPagoService {
         return programacionPagos;
     }
 
+    @Override
+    public ProgramacionPago getProgramacionPagoById(Integer id) {
+        return programacionPagoRepository.findById(id).orElseThrow(() -> new RuntimeException());
+    }
+
 }

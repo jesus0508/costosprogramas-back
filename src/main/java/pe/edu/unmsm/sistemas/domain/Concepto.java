@@ -8,7 +8,7 @@ import javax.persistence.Id;
 public class Concepto {
     @Id
     @Column(name = "id_concepto")
-    private Integer id;
+    private Short id;
     @Column(name = "concepto")
     private String concepto;
     @Column(name = "descripcion")
@@ -17,17 +17,17 @@ public class Concepto {
     public Concepto() {
     }
 
-    public Concepto(Integer id, String concepto, String descripcion) {
+    public Concepto(Short id, String concepto, String descripcion) {
         this.id = id;
         this.concepto = concepto;
         this.descripcion = descripcion;
     }
 
-    public Integer getId() {
+    public Short getId() {
         return id;
     }
 
-    public void setId(Integer id) {
+    public void setId(Short id) {
         this.id = id;
     }
 

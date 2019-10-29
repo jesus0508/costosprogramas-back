@@ -6,4 +6,5 @@ import java.util.Set;
 
 public interface ProgramaService {
     Set<Programa> getAllProgramas();
+    Programa getProgramaById(Short id);
 }

@@ -5,6 +5,6 @@ import pe.edu.unmsm.sistemas.domain.Concepto;
 
 import java.util.List;
 
-public interface ConceptoRepository extends JpaRepository<Concepto, Integer> {
-    List<Concepto> findByIdIn(List<Integer> conceptoIds);
+public interface ConceptoRepository extends JpaRepository<Concepto, Short> {
+    List<Concepto> findByIdIn(List<Short> conceptoIds);
 }

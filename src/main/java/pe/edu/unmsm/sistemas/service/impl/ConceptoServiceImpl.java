@@ -24,7 +24,7 @@ public class ConceptoServiceImpl implements ConceptoService {
 
     //9-21-62-117
     @Override
-    public List<Concepto> getAllConceptosPresupuesto(List<Integer> conceptosId) {
+    public List<Concepto> getAllConceptosPresupuesto(List<Short> conceptosId) {
         ArrayList<Concepto> conceptos = new ArrayList<>();
         conceptoRepository.findByIdIn(conceptosId).forEach(concepto -> conceptos.add(concepto));
         return conceptos;

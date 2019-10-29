@@ -6,9 +6,9 @@ import javax.persistence.*;
 public class ProgramaCiclo {
     @Id
     @Column(name = "id_programa_ciclo")
-    @GeneratedValue(strategy = GenerationType.IDENTITY)
+    @GeneratedValue(strategy = GenerationType.AUTO)
     private Integer id;
-    @OneToOne(cascade = CascadeType.ALL)
+    @ManyToOne(fetch = FetchType.EAGER)
     @JoinColumn(name = "id_tip_grado")
     private TipoGrado tipoGrado;
     @Column(name = "ciclo")
