@@ -26,7 +26,7 @@ public class ProgramaCicloController {
         return new ResponseEntity<>(programaCiclos, HttpStatus.OK);
     }
 
-    @GetMapping("/{tipo-grado}")
+    @GetMapping("/{tipo_grado}")
     public ResponseEntity<List<ProgramaCiclo>> getProgramaCiclo(@PathVariable String tipoGrado) {
         List<ProgramaCiclo> programaCiclos = programaCicloService.getAllProgramaCicloByTipoPago(tipoGrado);
         return new ResponseEntity<>(programaCiclos, HttpStatus.OK);
