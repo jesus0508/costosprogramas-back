@@ -14,7 +14,7 @@ import java.util.List;
 @RestController
 @CrossOrigin
 @Api(tags = "Programa Presupuesto")
-@RequestMapping("/presupuesto_store")
+@RequestMapping("/presupuestos")
 public class ProgramaPresupuestoController {
     @Autowired
     ProgramaPresupuestoService programaPresupuestoService;

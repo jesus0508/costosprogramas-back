@@ -14,7 +14,7 @@ import java.util.Set;
 @RestController
 @CrossOrigin
 @Api(tags = "Programa Ciclos")
-@RequestMapping("/programa_ciclos")
+@RequestMapping("/programa-ciclos")
 public class ProgramaCicloController {
 
     @Autowired
@@ -27,7 +27,7 @@ public class ProgramaCicloController {
     }
 
     @GetMapping("/{tipo-grado}")
-    public ResponseEntity<List<ProgramaCiclo>> getProgramaCiclo(@PathVariable String tipoGrado) {
+    public ResponseEntity<List<ProgramaCiclo>> getProgramaCiclo(@PathVariable(name = "tipo-grado") String tipoGrado) {
         List<ProgramaCiclo> programaCiclos = programaCicloService.getAllProgramaCicloByTipoPago(tipoGrado);
         return new ResponseEntity<>(programaCiclos, HttpStatus.OK);
     }

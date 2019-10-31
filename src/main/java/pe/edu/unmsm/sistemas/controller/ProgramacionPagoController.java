@@ -16,7 +16,7 @@ import java.util.Set;
 @RestController
 @CrossOrigin
 @Api(tags = "Programacion Pagos")
-@RequestMapping("/programacion_pagos")
+@RequestMapping("/programacion-pagos")
 public class ProgramacionPagoController {
 
     @Autowired
