@@ -6,7 +6,9 @@ import org.springframework.http.HttpStatus;
 import org.springframework.http.ResponseEntity;
 import org.springframework.web.bind.annotation.*;
 import pe.edu.unmsm.sistemas.domain.ProgramaPresupuesto;
-import pe.edu.unmsm.sistemas.dto.ProgramaPresupuestoDto;
+import pe.edu.unmsm.sistemas.domain.ProgramaPresupuestoDetalle;
+import pe.edu.unmsm.sistemas.dto.ProgramaPresupuestoWithDetalleDto;
+import pe.edu.unmsm.sistemas.service.ProgramaPresupuestoDetalleService;
 import pe.edu.unmsm.sistemas.service.ProgramaPresupuestoService;
 
 import java.util.List;
@@ -19,6 +21,9 @@ public class ProgramaPresupuestoController {
     @Autowired
     ProgramaPresupuestoService programaPresupuestoService;
 
+    @Autowired
+    ProgramaPresupuestoDetalleService programaPresupuestoDetalleService;
+
     @GetMapping
     public ResponseEntity<List<ProgramaPresupuesto>> getAllProgramasPresupuesto() {
         List<ProgramaPresupuesto> programaPresupuestos = programaPresupuestoService.getAllProgramaPresupuestos();
@@ -26,9 +31,11 @@ public class ProgramaPresupuestoController {
     }
 
     @PostMapping
-    public ResponseEntity<ProgramaPresupuesto> createProgramaPresupuesto(@RequestBody ProgramaPresupuestoDto programaPresupuestoDto) {
-        ProgramaPresupuesto programaPresupuesto = programaPresupuestoService.buildProgramaPresupuesto(programaPresupuestoDto);
-        programaPresupuesto = programaPresupuestoService.create(programaPresupuesto);
-        return new ResponseEntity<>(programaPresupuesto, HttpStatus.CREATED);
+    public ResponseEntity<ProgramaPresupuesto> createProgramaPresupuesto(@RequestBody ProgramaPresupuestoWithDetalleDto programaPresupuestoWithDetalleDto) {
+        ProgramaPresupuesto programaPresupuesto = programaPresupuestoService.buildProgramaPresupuesto(programaPresupuestoWithDetalleDto);
+        programaPresupuesto = programaPresupuestoService.createOrGetProgramPresupuesto(programaPresupuesto);
+        ProgramaPresupuestoDetalle programaPresupuestoDetalle = programaPresupuestoDetalleService.buildProgramaPresupuestoDetalle(programaPresupuestoWithDetalleDto);
+        programaPresupuesto.getProgramaPresupuestoDetalles().add(programaPresupuestoDetalle);
+        return new ResponseEntity<>(programaPresupuesto, HttpStatus.OK);
     }
 }

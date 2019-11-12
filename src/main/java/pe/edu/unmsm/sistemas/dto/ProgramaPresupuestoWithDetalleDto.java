@@ -4,35 +4,35 @@ import com.fasterxml.jackson.annotation.JsonInclude;
 import com.fasterxml.jackson.annotation.JsonProperty;
 
 
-public class ProgramaPresupuestoDto {
+public class ProgramaPresupuestoWithDetalleDto {
 
-    @JsonInclude(JsonInclude.Include.NON_NULL)
+    @JsonProperty("id_programa_presupuesto_det")
     public Integer id;
     @JsonProperty("id_programa")
-    public Short idPrograma;
+    public Short idPrograma;//
     @JsonProperty("id_programacion_pagos")
-    public Integer idProgramacionPago;
+    public Integer idProgramacionPago;//
     @JsonProperty("id_concepto")
-    public Short idConcepto;
+    public Short idConcepto;//
     @JsonProperty("id_programa_ciclo")
-    public Short idProgramaCiclo;
+    public Integer idProgramaCiclo;//
     @JsonProperty("costo_credito")
-    public Integer costoCredito;
+    public Integer costoCredito;//
     @JsonProperty("costo_total")
-    public Long costoTotal;
+    public Long costoTotal;//
     @JsonProperty("creditos")
-    public Short credito;
+    public Short credito;//
     @JsonProperty("importe")
-    public Double importe;
+    public Double importe;//
     @JsonProperty("cuotas")
-    public Integer cuotas;
+    public Integer cuotas;//
 
-    public ProgramaPresupuestoDto() {
+    public ProgramaPresupuestoWithDetalleDto() {
     }
 
-    public ProgramaPresupuestoDto(Integer id, Short idPrograma, Integer idProgramacionPago, Short idConcepto,
-                                  Short idProgramaCiclo, Integer costoCredito, Long costoTotal, Short credito,
-                                  Double importe, Integer cuotas) {
+    public ProgramaPresupuestoWithDetalleDto(Integer id, Short idPrograma, Integer idProgramacionPago, Short idConcepto,
+                                             Integer idProgramaCiclo, Integer costoCredito, Long costoTotal, Short credito,
+                                             Double importe, Integer cuotas) {
         this.id = id;
         this.idPrograma = idPrograma;
         this.idProgramacionPago = idProgramacionPago;

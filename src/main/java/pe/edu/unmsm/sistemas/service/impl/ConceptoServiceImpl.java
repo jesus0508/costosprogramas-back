@@ -22,6 +22,11 @@ public class ConceptoServiceImpl implements ConceptoService {
         return conceptos;
     }
 
+    @Override
+    public Concepto getConceptoById(Short id) {
+        return conceptoRepository.findById(id).orElseThrow(RuntimeException::new);
+    }
+
     //9-21-62-117
     @Override
     public List<Concepto> getAllConceptosPresupuesto(List<Short> conceptosId) {

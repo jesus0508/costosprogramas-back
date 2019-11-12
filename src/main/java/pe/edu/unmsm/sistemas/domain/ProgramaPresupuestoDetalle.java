@@ -27,4 +27,52 @@ public class ProgramaPresupuestoDetalle {
 
     public ProgramaPresupuestoDetalle() {
     }
+
+    public ProgramaPresupuesto getProgramaPresupuesto() {
+        return programaPresupuesto;
+    }
+
+    public void setProgramaPresupuesto(ProgramaPresupuesto programaPresupuesto) {
+        this.programaPresupuesto = programaPresupuesto;
+    }
+
+    public Concepto getConcepto() {
+        return concepto;
+    }
+
+    public void setConcepto(Concepto concepto) {
+        this.concepto = concepto;
+    }
+
+    public ProgramaCiclo getProgramaCiclo() {
+        return programaCiclo;
+    }
+
+    public void setProgramaCiclo(ProgramaCiclo programaCiclo) {
+        this.programaCiclo = programaCiclo;
+    }
+
+    public Short getCredito() {
+        return credito;
+    }
+
+    public void setCredito(Short credito) {
+        this.credito = credito;
+    }
+
+    public Double getImporte() {
+        return importe;
+    }
+
+    public void setImporte(Double importe) {
+        this.importe = importe;
+    }
+
+    public Integer getCuotas() {
+        return cuotas;
+    }
+
+    public void setCuotas(Integer cuotas) {
+        this.cuotas = cuotas;
+    }
 }
