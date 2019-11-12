@@ -6,7 +6,7 @@ import pe.edu.unmsm.sistemas.dto.ProgramaPresupuestoWithDetalleDto;
 
 import java.util.Set;
 
-@Service
+
 public interface ProgramaPresupuestoDetalleService {
     Set<ProgramaPresupuestoDetalle> getAllProgramaPresupuestoDetalle();
 

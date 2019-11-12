@@ -1,6 +1,7 @@
 package pe.edu.unmsm.sistemas.service.impl;
 
 import org.springframework.beans.factory.annotation.Autowired;
+import org.springframework.stereotype.Service;
 import pe.edu.unmsm.sistemas.domain.Concepto;
 import pe.edu.unmsm.sistemas.domain.ProgramaCiclo;
 import pe.edu.unmsm.sistemas.domain.ProgramaPresupuestoDetalle;
@@ -14,6 +15,7 @@ import pe.edu.unmsm.sistemas.service.ProgramaPresupuestoDetalleService;
 import java.util.HashSet;
 import java.util.Set;
 
+@Service
 public class ProgramaPresupuestoDetalleServiceImpl implements ProgramaPresupuestoDetalleService {
 
     @Autowired
