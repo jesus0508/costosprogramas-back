@@ -2,6 +2,7 @@ package pe.edu.unmsm.sistemas.service;
 
 import pe.edu.unmsm.sistemas.domain.ProgramaPresupuestoDetalle;
 import pe.edu.unmsm.sistemas.domain.ProgramaPresupuestoDetalleId;
+import pe.edu.unmsm.sistemas.dto.ProgramaPresupuestoDetalleDto;
 import pe.edu.unmsm.sistemas.dto.ProgramaPresupuestoWithDetalleDto;
 
 import java.util.Set;

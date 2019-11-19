@@ -31,15 +31,21 @@ public class ProgramaPresupuestoDetalleController {
 
     @PutMapping("/{id}")
     public ResponseEntity<ProgramaPresupuestoDetalle> updateProgramaPresupuestoDetalle(
-            @RequestBody ProgramaPresupuestoDetalle programaPresupuestoDetalle) {
+            @PathVariable Integer id,
+            @RequestBody ProgramaPresupuestoWithDetalleDto programaPresupuestoWithDetalleDto) {
 
+        ProgramaPresupuestoDetalle programaPresupuestoDetalle = programaPresupuestoDetalleService.buildProgramaPresupuestoDetalle(programaPresupuestoWithDetalleDto);
         programaPresupuestoDetalle = programaPresupuestoDetalleService.saveProgramPresupuestoDetalle(programaPresupuestoDetalle);
         return new ResponseEntity<>(programaPresupuestoDetalle, HttpStatus.OK);
     }
 
-    @DeleteMapping("/{id}")
+    @DeleteMapping("/")
     public ResponseEntity<ProgramaPresupuestoDetalleId> deleteProgramaPresupuestoDetalle(
-            @RequestBody ProgramaPresupuestoDetalleId programaPresupuestoDetalleId) {
+            @RequestParam(name = "id-presupuesto") Integer idProgramaPresupuesto,
+            @RequestParam(name = "id-concepto") Short idConcepto,
+            @RequestParam(name = "id-ciclo") Integer idProgramaCiclo) {
+
+        ProgramaPresupuestoDetalleId programaPresupuestoDetalleId = new ProgramaPresupuestoDetalleId(idProgramaPresupuesto, idConcepto, idProgramaCiclo);
         programaPresupuestoDetalleId = programaPresupuestoDetalleService.deleteProgramaPresupuestoDetalle(programaPresupuestoDetalleId);
         return new ResponseEntity<>(programaPresupuestoDetalleId, HttpStatus.OK);
 

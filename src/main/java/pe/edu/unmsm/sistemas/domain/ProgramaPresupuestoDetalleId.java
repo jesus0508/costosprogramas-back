@@ -11,6 +11,12 @@ public class ProgramaPresupuestoDetalleId implements Serializable {
     public ProgramaPresupuestoDetalleId() {
     }
 
+    public ProgramaPresupuestoDetalleId(Integer programaPresupuesto, Short concepto, Integer programaCiclo) {
+        this.programaPresupuesto = programaPresupuesto;
+        this.concepto = concepto;
+        this.programaCiclo = programaCiclo;
+    }
+
     public Integer getProgramaPresupuesto() {
         return programaPresupuesto;
     }

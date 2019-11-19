@@ -3,6 +3,7 @@ package pe.edu.unmsm.sistemas.service.impl;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Service;
 import pe.edu.unmsm.sistemas.domain.*;
+import pe.edu.unmsm.sistemas.dto.ProgramaPresupuestoDetalleDto;
 import pe.edu.unmsm.sistemas.dto.ProgramaPresupuestoWithDetalleDto;
 import pe.edu.unmsm.sistemas.repository.ProgramaPresupuestoDetalleRepository;
 import pe.edu.unmsm.sistemas.service.ConceptoService;
@@ -62,4 +63,5 @@ public class ProgramaPresupuestoDetalleServiceImpl implements ProgramaPresupuest
         programaPresupuestoDetalleRepository.deleteById(programaPresupuestoDetalleId);
         return programaPresupuestoDetalleId;
     }
+
 }

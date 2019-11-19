@@ -56,7 +56,9 @@ public class ProgramaPresupuestoController {
     }
 
     @PutMapping("/{id}")
-    public ResponseEntity<ProgramaPresupuesto> updateProgramaPresupuesto(@RequestBody ProgramaPresupuesto programaPresupuesto) {
+    public ResponseEntity<ProgramaPresupuesto> updateProgramaPresupuesto(
+            @PathVariable Integer id, @RequestBody ProgramaPresupuesto programaPresupuesto) {
+
         programaPresupuesto = programaPresupuestoService.saveProgramaPresupuesto(programaPresupuesto);
         return new ResponseEntity<>(programaPresupuesto, HttpStatus.OK);
     }
