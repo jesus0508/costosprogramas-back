@@ -1,6 +1,5 @@
 package pe.edu.unmsm.sistemas.dto;
 
-import com.fasterxml.jackson.annotation.JsonInclude;
 import com.fasterxml.jackson.annotation.JsonProperty;
 
 
@@ -9,23 +8,23 @@ public class ProgramaPresupuestoWithDetalleDto {
     @JsonProperty("id_programa_presupuesto_det")
     public Integer id;
     @JsonProperty("id_programa")
-    public Short idPrograma;//
+    public Short idPrograma;
     @JsonProperty("id_programacion_pagos")
-    public Integer idProgramacionPago;//
+    public Integer idProgramacionPago;
     @JsonProperty("id_concepto")
-    public Short idConcepto;//
+    public Short idConcepto;
     @JsonProperty("id_programa_ciclo")
-    public Integer idProgramaCiclo;//
+    public Integer idProgramaCiclo;
     @JsonProperty("costo_credito")
-    public Integer costoCredito;//
+    public Integer costoCredito;
     @JsonProperty("costo_total")
-    public Long costoTotal;//
+    public Long costoTotal;
     @JsonProperty("creditos")
-    public Short credito;//
+    public Short credito;
     @JsonProperty("importe")
-    public Double importe;//
+    public Double importe;
     @JsonProperty("cuotas")
-    public Integer cuotas;//
+    public Integer cuotas;
 
     public ProgramaPresupuestoWithDetalleDto() {
     }

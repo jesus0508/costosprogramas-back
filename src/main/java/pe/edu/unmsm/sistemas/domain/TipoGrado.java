@@ -4,6 +4,7 @@ import javax.persistence.*;
 
 @Entity(name = "tipo_grado")
 public class TipoGrado {
+
     @Id
     @Column(name = "id_tip_grado")
     @GeneratedValue(strategy = GenerationType.IDENTITY)

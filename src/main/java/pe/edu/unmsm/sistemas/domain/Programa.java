@@ -4,6 +4,7 @@ import javax.persistence.*;
 
 @Entity(name = "programa")
 public class Programa {
+
     @Id
     @Column(name = "id_programa")
     @GeneratedValue(strategy = GenerationType.AUTO)
@@ -23,18 +24,8 @@ public class Programa {
     public Programa() {
     }
 
-    public Programa(Short id, String nombrePrograma, String siglaPrograma, Boolean vigenciaPrograma,
-                    Integer numeroPrioridad, TipoGrado tipoGrado) {
-        this.id = id;
-        this.nombrePrograma = nombrePrograma;
-        this.siglaPrograma = siglaPrograma;
-        this.vigenciaPrograma = vigenciaPrograma;
-        this.numeroPrioridad = numeroPrioridad;
-        this.tipoGrado = tipoGrado;
-    }
-
     public Short getId() {
-        return this.id;
+        return id;
     }
 
     public void setId(Short id) {
@@ -42,7 +33,7 @@ public class Programa {
     }
 
     public String getNombrePrograma() {
-        return this.nombrePrograma;
+        return nombrePrograma;
     }
 
     public void setNombrePrograma(String nombrePrograma) {
@@ -50,19 +41,15 @@ public class Programa {
     }
 
     public String getSiglaPrograma() {
-        return this.siglaPrograma;
+        return siglaPrograma;
     }
 
     public void setSiglaPrograma(String siglaPrograma) {
         this.siglaPrograma = siglaPrograma;
     }
 
-    public Boolean isVigenciaPrograma() {
-        return this.vigenciaPrograma;
-    }
-
     public Boolean getVigenciaPrograma() {
-        return this.vigenciaPrograma;
+        return vigenciaPrograma;
     }
 
     public void setVigenciaPrograma(Boolean vigenciaPrograma) {
@@ -70,7 +57,7 @@ public class Programa {
     }
 
     public Integer getNumeroPrioridad() {
-        return this.numeroPrioridad;
+        return numeroPrioridad;
     }
 
     public void setNumeroPrioridad(Integer numeroPrioridad) {
@@ -78,7 +65,7 @@ public class Programa {
     }
 
     public TipoGrado getTipoGrado() {
-        return this.tipoGrado;
+        return tipoGrado;
     }
 
     public void setTipoGrado(TipoGrado tipoGrado) {

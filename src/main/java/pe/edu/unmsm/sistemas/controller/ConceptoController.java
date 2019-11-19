@@ -16,6 +16,7 @@ import java.util.Optional;
 @Api(tags = "Concepto")
 @RequestMapping("/conceptos")
 public class ConceptoController {
+
     @Autowired
     ConceptoService conceptoService;
 

@@ -5,6 +5,7 @@ import java.util.List;
 
 @Entity(name = "programa_presupuesto")
 public class ProgramaPresupuesto {
+
     @Id
     @Column(name = "id_programa_presupuesto")
     @GeneratedValue(strategy = GenerationType.AUTO)
@@ -15,11 +16,11 @@ public class ProgramaPresupuesto {
     @ManyToOne(optional = false, fetch = FetchType.EAGER)
     @JoinColumn(name = "id_programacion_pagos")
     private ProgramacionPago programacionPago;
-    @OneToMany(fetch = FetchType.LAZY, cascade = CascadeType.ALL, mappedBy = "programaPresupuesto")
+    @OneToMany(fetch = FetchType.EAGER, cascade = CascadeType.ALL, mappedBy = "programaPresupuesto")
     private List<ProgramaPresupuestoDetalle> programaPresupuestoDetalles;
-    @Column(name = "costo_credito")
+    @Column(name = "costo_credito", nullable = false)
     private Integer costoCredito;
-    @Column(name = "costo_total")
+    @Column(name = "costo_total", nullable = false)
     private Long costoTotal;
 
     public ProgramaPresupuesto() {
@@ -79,5 +80,17 @@ public class ProgramaPresupuesto {
 
     public void setCostoTotal(Long costoTotal) {
         this.costoTotal = costoTotal;
+    }
+
+    @Override
+    public String toString() {
+        return "ProgramaPresupuesto{" +
+                "id=" + id +
+                ", programa=" + programa +
+                ", programacionPago=" + programacionPago +
+                ", programaPresupuestoDetalles=" + programaPresupuestoDetalles +
+                ", costoCredito=" + costoCredito +
+                ", costoTotal=" + costoTotal +
+                '}';
     }
 }

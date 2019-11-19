@@ -6,6 +6,7 @@ import javax.persistence.Id;
 
 @Entity(name = "concepto")
 public class Concepto {
+
     @Id
     @Column(name = "id_concepto")
     private Short id;

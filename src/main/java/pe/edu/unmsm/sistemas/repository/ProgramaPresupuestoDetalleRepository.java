@@ -5,4 +5,5 @@ import pe.edu.unmsm.sistemas.domain.ProgramaPresupuestoDetalle;
 import pe.edu.unmsm.sistemas.domain.ProgramaPresupuestoDetalleId;
 
 public interface ProgramaPresupuestoDetalleRepository extends JpaRepository<ProgramaPresupuestoDetalle, ProgramaPresupuestoDetalleId> {
+
 }

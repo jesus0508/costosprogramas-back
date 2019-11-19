@@ -5,6 +5,7 @@ import java.sql.Date;
 
 @Entity(name = "programacion_pagos")
 public class ProgramacionPago {
+
     @Id
     @Column(name = "id_programacion_pagos")
     @GeneratedValue(strategy = GenerationType.AUTO)

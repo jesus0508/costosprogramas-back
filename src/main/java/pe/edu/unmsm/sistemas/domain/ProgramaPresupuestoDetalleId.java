@@ -4,10 +4,43 @@ import java.io.Serializable;
 
 public class ProgramaPresupuestoDetalleId implements Serializable {
 
-    private ProgramaPresupuesto programaPresupuesto;
-    private Concepto concepto;
-    private ProgramaCiclo programaCiclo;
+    private Integer programaPresupuesto;
+    private Short concepto;
+    private Integer programaCiclo;
 
     public ProgramaPresupuestoDetalleId() {
+    }
+
+    public Integer getProgramaPresupuesto() {
+        return programaPresupuesto;
+    }
+
+    public void setProgramaPresupuesto(Integer programaPresupuesto) {
+        this.programaPresupuesto = programaPresupuesto;
+    }
+
+    public Short getConcepto() {
+        return concepto;
+    }
+
+    public void setConcepto(Short concepto) {
+        this.concepto = concepto;
+    }
+
+    public Integer getProgramaCiclo() {
+        return programaCiclo;
+    }
+
+    public void setProgramaCiclo(Integer programaCiclo) {
+        this.programaCiclo = programaCiclo;
+    }
+
+    @Override
+    public String toString() {
+        return "ProgramaPresupuestoDetalleId{" +
+                "programaPresupuesto=" + programaPresupuesto +
+                ", concepto=" + concepto +
+                ", programaCiclo=" + programaCiclo +
+                '}';
     }
 }

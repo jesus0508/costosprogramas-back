@@ -7,5 +7,4 @@ import java.util.Set;
 
 public interface ProgramaCicloRepository extends JpaRepository<ProgramaCiclo, Integer> {
     Set<ProgramaCiclo> findAllByTipoGradoId(String id);
-
 }

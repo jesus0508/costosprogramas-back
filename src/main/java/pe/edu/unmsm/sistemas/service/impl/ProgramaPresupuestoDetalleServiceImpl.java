@@ -2,15 +2,13 @@ package pe.edu.unmsm.sistemas.service.impl;
 
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Service;
-import pe.edu.unmsm.sistemas.domain.Concepto;
-import pe.edu.unmsm.sistemas.domain.ProgramaCiclo;
-import pe.edu.unmsm.sistemas.domain.ProgramaPresupuestoDetalle;
-import pe.edu.unmsm.sistemas.domain.ProgramaPresupuestoDetalleId;
+import pe.edu.unmsm.sistemas.domain.*;
 import pe.edu.unmsm.sistemas.dto.ProgramaPresupuestoWithDetalleDto;
 import pe.edu.unmsm.sistemas.repository.ProgramaPresupuestoDetalleRepository;
 import pe.edu.unmsm.sistemas.service.ConceptoService;
 import pe.edu.unmsm.sistemas.service.ProgramaCicloService;
 import pe.edu.unmsm.sistemas.service.ProgramaPresupuestoDetalleService;
+import pe.edu.unmsm.sistemas.service.ProgramaPresupuestoService;
 
 import java.util.HashSet;
 import java.util.Set;
@@ -27,6 +25,9 @@ public class ProgramaPresupuestoDetalleServiceImpl implements ProgramaPresupuest
     @Autowired
     ProgramaCicloService programaCicloService;
 
+    @Autowired
+    ProgramaPresupuestoService programaPresupuestoService;
+
     @Override
     public Set<ProgramaPresupuestoDetalle> getAllProgramaPresupuestoDetalle() {
         Set<ProgramaPresupuestoDetalle> programaPresupuestoDetalles = new HashSet<>();
@@ -36,9 +37,13 @@ public class ProgramaPresupuestoDetalleServiceImpl implements ProgramaPresupuest
 
     @Override
     public ProgramaPresupuestoDetalle buildProgramaPresupuestoDetalle(ProgramaPresupuestoWithDetalleDto programaPresupuestoWithDetalleDto) {
+
+        ProgramaPresupuesto programaPresupuesto = programaPresupuestoService.buildProgramaPresupuesto(programaPresupuestoWithDetalleDto);
         Concepto concepto = conceptoService.getConceptoById(programaPresupuestoWithDetalleDto.idConcepto);
         ProgramaCiclo programaCiclo = programaCicloService.getProgramaCicloById(programaPresupuestoWithDetalleDto.idProgramaCiclo);
+
         ProgramaPresupuestoDetalle programaPresupuestoDetalle = new ProgramaPresupuestoDetalle();
+        programaPresupuestoDetalle.setProgramaPresupuesto(programaPresupuesto);
         programaPresupuestoDetalle.setConcepto(concepto);
         programaPresupuestoDetalle.setProgramaCiclo(programaCiclo);
         programaPresupuestoDetalle.setCredito(programaPresupuestoWithDetalleDto.credito);

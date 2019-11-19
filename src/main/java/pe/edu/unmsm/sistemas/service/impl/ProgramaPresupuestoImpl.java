@@ -1,5 +1,7 @@
 package pe.edu.unmsm.sistemas.service.impl;
 
+import org.slf4j.Logger;
+import org.slf4j.LoggerFactory;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Service;
 import pe.edu.unmsm.sistemas.domain.Programa;
@@ -19,13 +21,17 @@ import java.util.Optional;
 
 @Service
 public class ProgramaPresupuestoImpl implements ProgramaPresupuestoService {
+
+    private static final Logger logger = LoggerFactory.getLogger(ProgramaPresupuestoService.class);
+
     @Autowired
     ProgramaPresupuestoRepository programaPresupuestoRepository;
     @Autowired
     ProgramaService programaService;
     @Autowired
     ProgramacionPagoService programacionPagoService;
-
+    @Autowired
+    ProgramaPresupuestoDetalleService programaPresupuestoDetalleService;
 
     @Override
     public List<ProgramaPresupuesto> getAllProgramaPresupuestos() {
@@ -35,11 +41,21 @@ public class ProgramaPresupuestoImpl implements ProgramaPresupuestoService {
     }
 
     @Override
+    public ProgramaPresupuesto getProgramaPresupuestoByProgramaAndProgramacionPago(Short idPrograma, Integer idProgramacionPago) {
+        return programaPresupuestoRepository.findByProgramaIdAndProgramacionPagoId(idPrograma, idProgramacionPago);
+    }
+
+    @Override
+    public ProgramaPresupuesto getProgramaPresupuesto(Integer id) {
+        logger.info("Id Programa Presupuesto " + id);
+        return programaPresupuestoRepository.findById(id).orElseThrow(RuntimeException::new);
+    }
+
+    @Override
     public ProgramaPresupuesto buildProgramaPresupuesto(ProgramaPresupuestoWithDetalleDto programaPresupuestoWithDetalleDto) {
         Programa programa = programaService.getProgramaById(programaPresupuestoWithDetalleDto.idPrograma);
         ProgramacionPago programacionPago = programacionPagoService.getProgramacionPagoById(programaPresupuestoWithDetalleDto.idProgramacionPago);
         ProgramaPresupuesto programaPresupuesto = new ProgramaPresupuesto();
-        programaPresupuesto.setId(programaPresupuestoWithDetalleDto.id);
         programaPresupuesto.setPrograma(programa);
         programaPresupuesto.setProgramacionPago(programacionPago);
         programaPresupuesto.setCostoCredito(programaPresupuestoWithDetalleDto.costoCredito);
@@ -53,13 +69,27 @@ public class ProgramaPresupuestoImpl implements ProgramaPresupuestoService {
     }
 
     @Override
-    public ProgramaPresupuesto createOrGetProgramPresupuesto(ProgramaPresupuesto programaPresupuesto){
+    public ProgramaPresupuesto createOrGetProgramPresupuesto(ProgramaPresupuesto programaPresupuesto) {
         Optional<ProgramaPresupuesto> programaPresupuestoOptional = programaPresupuestoRepository.findById(programaPresupuesto.getId());
-        if(programaPresupuestoOptional.isPresent()){
+        if (programaPresupuestoOptional.isPresent()) {
             return programaPresupuestoOptional.get();
-        }else{
+        } else {
             return programaPresupuestoRepository.save(programaPresupuesto);
         }
+    }
+
+    @Override
+    public ProgramaPresupuesto addProgramaPresupuestoDetalle(
+            Integer id, ProgramaPresupuestoWithDetalleDto programaPresupuestoWithDetalleDto) {
+
+        ProgramaPresupuesto programaPresupuesto = getProgramaPresupuesto(id);
+        ProgramaPresupuestoDetalle programaPresupuestoDetalle = programaPresupuestoDetalleService.buildProgramaPresupuestoDetalle(programaPresupuestoWithDetalleDto);
+        programaPresupuestoDetalle.setProgramaPresupuesto(programaPresupuesto);
+        programaPresupuesto.getProgramaPresupuestoDetalles().add(programaPresupuestoDetalle);
+        Long costoTotal = programaPresupuesto.getCostoTotal() + programaPresupuestoDetalle.getImporte().longValue();
+        programaPresupuesto.setCostoTotal(costoTotal);
+        logger.info("Programa Presupuesto= " + programaPresupuesto);
+        return programaPresupuestoRepository.save(programaPresupuesto);
     }
 
 

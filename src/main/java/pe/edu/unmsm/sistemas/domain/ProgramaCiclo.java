@@ -4,6 +4,7 @@ import javax.persistence.*;
 
 @Entity(name = "programa_ciclo")
 public class ProgramaCiclo {
+
     @Id
     @Column(name = "id_programa_ciclo")
     @GeneratedValue(strategy = GenerationType.AUTO)

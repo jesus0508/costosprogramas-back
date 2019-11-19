@@ -1,5 +1,7 @@
 package pe.edu.unmsm.sistemas.domain;
 
+import com.fasterxml.jackson.annotation.JsonIgnore;
+
 import javax.persistence.*;
 
 @IdClass(ProgramaPresupuestoDetalleId.class)
@@ -7,6 +9,7 @@ import javax.persistence.*;
 public class ProgramaPresupuestoDetalle {
 
     @Id
+    @JsonIgnore
     @ManyToOne(fetch = FetchType.EAGER)
     @JoinColumn(name = "id_programa_presupuesto")
     private ProgramaPresupuesto programaPresupuesto;
@@ -75,4 +78,5 @@ public class ProgramaPresupuestoDetalle {
     public void setCuotas(Integer cuotas) {
         this.cuotas = cuotas;
     }
+
 }
