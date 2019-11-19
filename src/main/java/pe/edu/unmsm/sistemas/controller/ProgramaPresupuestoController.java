@@ -7,6 +7,7 @@ import org.springframework.http.MediaType;
 import org.springframework.http.ResponseEntity;
 import org.springframework.web.bind.annotation.*;
 import pe.edu.unmsm.sistemas.domain.ProgramaPresupuesto;
+import pe.edu.unmsm.sistemas.domain.ProgramaPresupuestoDetalle;
 import pe.edu.unmsm.sistemas.dto.ProgramaPresupuestoWithDetalleDto;
 import pe.edu.unmsm.sistemas.service.ProgramaPresupuestoService;
 
@@ -42,15 +43,15 @@ public class ProgramaPresupuestoController {
             @RequestBody ProgramaPresupuesto programaPresupuesto) {
 
         programaPresupuesto = programaPresupuestoService.createOrGetProgramPresupuesto(programaPresupuesto);
-        return new ResponseEntity<>(programaPresupuesto, HttpStatus.OK);
+        return new ResponseEntity<>(programaPresupuesto, HttpStatus.CREATED);
     }
 
     @PutMapping("/{id}/detalle")
-    public ResponseEntity<ProgramaPresupuesto> addProgramaPresupuestoDetalle(
+    public ResponseEntity<ProgramaPresupuestoDetalle> addProgramaPresupuestoDetalle(
             @PathVariable Integer id,
             @RequestBody ProgramaPresupuestoWithDetalleDto programaPresupuestoWithDetalleDto) {
 
-        ProgramaPresupuesto programaPresupuesto = programaPresupuestoService.addProgramaPresupuestoDetalle(id, programaPresupuestoWithDetalleDto);
+        ProgramaPresupuestoDetalle programaPresupuesto = programaPresupuestoService.addProgramaPresupuestoDetalle(id, programaPresupuestoWithDetalleDto);
         return new ResponseEntity<>(programaPresupuesto, HttpStatus.CREATED);
     }
 }

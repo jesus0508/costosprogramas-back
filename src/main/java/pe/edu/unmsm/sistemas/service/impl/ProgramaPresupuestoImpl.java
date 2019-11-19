@@ -79,7 +79,7 @@ public class ProgramaPresupuestoImpl implements ProgramaPresupuestoService {
     }
 
     @Override
-    public ProgramaPresupuesto addProgramaPresupuestoDetalle(
+    public ProgramaPresupuestoDetalle addProgramaPresupuestoDetalle(
             Integer id, ProgramaPresupuestoWithDetalleDto programaPresupuestoWithDetalleDto) {
 
         ProgramaPresupuesto programaPresupuesto = getProgramaPresupuesto(id);
@@ -88,8 +88,9 @@ public class ProgramaPresupuestoImpl implements ProgramaPresupuestoService {
         programaPresupuesto.getProgramaPresupuestoDetalles().add(programaPresupuestoDetalle);
         Long costoTotal = programaPresupuesto.getCostoTotal() + programaPresupuestoDetalle.getImporte().longValue();
         programaPresupuesto.setCostoTotal(costoTotal);
-        logger.info("Programa Presupuesto= " + programaPresupuesto);
-        return programaPresupuestoRepository.save(programaPresupuesto);
+        programaPresupuestoRepository.save(programaPresupuesto);
+        logger.info("Programa Presupuesto= " + programaPresupuestoDetalle);
+        return programaPresupuestoDetalle;
     }
 
 

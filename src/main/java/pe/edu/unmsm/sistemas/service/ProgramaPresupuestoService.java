@@ -1,6 +1,7 @@
 package pe.edu.unmsm.sistemas.service;
 
 import pe.edu.unmsm.sistemas.domain.ProgramaPresupuesto;
+import pe.edu.unmsm.sistemas.domain.ProgramaPresupuestoDetalle;
 import pe.edu.unmsm.sistemas.dto.ProgramaPresupuestoWithDetalleDto;
 
 import java.util.List;
@@ -18,5 +19,5 @@ public interface ProgramaPresupuestoService {
 
     ProgramaPresupuesto createOrGetProgramPresupuesto(ProgramaPresupuesto programaPresupuesto);
 
-    ProgramaPresupuesto addProgramaPresupuestoDetalle(Integer id, ProgramaPresupuestoWithDetalleDto programaPresupuestoDetalle);
+    ProgramaPresupuestoDetalle addProgramaPresupuestoDetalle(Integer id, ProgramaPresupuestoWithDetalleDto programaPresupuestoDetalle);
 }
