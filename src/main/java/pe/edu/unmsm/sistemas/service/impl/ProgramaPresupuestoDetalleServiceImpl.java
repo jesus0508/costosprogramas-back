@@ -53,7 +53,13 @@ public class ProgramaPresupuestoDetalleServiceImpl implements ProgramaPresupuest
     }
 
     @Override
-    public ProgramaPresupuestoDetalle create(ProgramaPresupuestoDetalle programaPresupuestoDetalle) {
+    public ProgramaPresupuestoDetalle saveProgramPresupuestoDetalle(ProgramaPresupuestoDetalle programaPresupuestoDetalle) {
         return programaPresupuestoDetalleRepository.save(programaPresupuestoDetalle);
+    }
+
+    @Override
+    public ProgramaPresupuestoDetalleId deleteProgramaPresupuestoDetalle(ProgramaPresupuestoDetalleId programaPresupuestoDetalleId) {
+        programaPresupuestoDetalleRepository.deleteById(programaPresupuestoDetalleId);
+        return programaPresupuestoDetalleId;
     }
 }

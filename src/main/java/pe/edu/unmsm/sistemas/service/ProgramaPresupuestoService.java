@@ -15,9 +15,11 @@ public interface ProgramaPresupuestoService {
 
     ProgramaPresupuesto buildProgramaPresupuesto(ProgramaPresupuestoWithDetalleDto programaPresupuestoWithDetalleDto);
 
-    ProgramaPresupuesto create(ProgramaPresupuesto programaPresupuesto);
+    ProgramaPresupuesto saveProgramaPresupuesto(ProgramaPresupuesto programaPresupuesto);
 
     ProgramaPresupuesto createOrGetProgramPresupuesto(ProgramaPresupuesto programaPresupuesto);
 
     ProgramaPresupuestoDetalle addProgramaPresupuestoDetalle(Integer id, ProgramaPresupuestoWithDetalleDto programaPresupuestoDetalle);
+
+    ProgramaPresupuesto updateProgramaPresupuesto(ProgramaPresupuesto programaPresupuesto);
 }

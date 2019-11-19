@@ -54,4 +54,10 @@ public class ProgramaPresupuestoController {
         ProgramaPresupuestoDetalle programaPresupuesto = programaPresupuestoService.addProgramaPresupuestoDetalle(id, programaPresupuestoWithDetalleDto);
         return new ResponseEntity<>(programaPresupuesto, HttpStatus.CREATED);
     }
+
+    @PutMapping("/{id}")
+    public ResponseEntity<ProgramaPresupuesto> updateProgramaPresupuesto(@RequestBody ProgramaPresupuesto programaPresupuesto) {
+        programaPresupuesto = programaPresupuestoService.saveProgramaPresupuesto(programaPresupuesto);
+        return new ResponseEntity<>(programaPresupuesto, HttpStatus.OK);
+    }
 }

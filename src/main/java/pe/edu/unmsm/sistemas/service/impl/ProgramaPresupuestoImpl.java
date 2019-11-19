@@ -64,7 +64,7 @@ public class ProgramaPresupuestoImpl implements ProgramaPresupuestoService {
     }
 
     @Override
-    public ProgramaPresupuesto create(ProgramaPresupuesto programaPresupuesto) {
+    public ProgramaPresupuesto saveProgramaPresupuesto(ProgramaPresupuesto programaPresupuesto) {
         return programaPresupuestoRepository.save(programaPresupuesto);
     }
 
@@ -93,5 +93,17 @@ public class ProgramaPresupuestoImpl implements ProgramaPresupuestoService {
         return programaPresupuestoDetalle;
     }
 
+    @Override
+    public ProgramaPresupuesto updateProgramaPresupuesto(ProgramaPresupuesto programaPresupuesto) {
+        List<ProgramaPresupuestoDetalle> programaPresupuestoDetalles = new LinkedList<>();
+        Double newCostoCredito = programaPresupuesto.getCostoCredito().doubleValue();
+        programaPresupuesto.getProgramaPresupuestoDetalles().forEach((programaPresupuestoDetalle) -> {
+            programaPresupuestoDetalle.setImporte(newCostoCredito * programaPresupuestoDetalle.getCredito());
+            programaPresupuestoDetalle.setProgramaPresupuesto(programaPresupuesto);
+            programaPresupuestoDetalles.add(programaPresupuestoDetalle);
+        });
+        programaPresupuesto.setProgramaPresupuestoDetalles(programaPresupuestoDetalles);
+        return programaPresupuesto;
+    }
 
 }
