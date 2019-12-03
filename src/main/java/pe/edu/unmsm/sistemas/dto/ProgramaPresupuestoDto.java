@@ -13,6 +13,9 @@ public class ProgramaPresupuestoDto {
     @JsonProperty("costo_total")
     public Long costoTotal;
 
+    public ProgramaPresupuestoDto() {
+    }
+
     public ProgramaPresupuestoDto(ProgramaPresupuestoWithDetalleDto programaPresupuestoWithDetalleDto) {
         idPrograma = programaPresupuestoWithDetalleDto.idPrograma;
         idProgramacionPago = programaPresupuestoWithDetalleDto.idProgramacionPago;
