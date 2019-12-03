@@ -19,6 +19,7 @@ public class ProgramaPresupuesto {
     @ManyToOne(optional = false, fetch = FetchType.EAGER)
     @JoinColumn(name = "id_programacion_pagos")
     private ProgramacionPago programacionPago;
+    @JsonProperty(access = JsonProperty.Access.READ_ONLY)
     @OneToMany(fetch = FetchType.EAGER, cascade = CascadeType.ALL, mappedBy = "programaPresupuesto")
     private List<ProgramaPresupuestoDetalle> programaPresupuestoDetalles;
     @Column(name = "costo_credito", nullable = false)

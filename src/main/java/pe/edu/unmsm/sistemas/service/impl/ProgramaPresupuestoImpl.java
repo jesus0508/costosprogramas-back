@@ -8,6 +8,7 @@ import pe.edu.unmsm.sistemas.domain.Programa;
 import pe.edu.unmsm.sistemas.domain.ProgramaPresupuesto;
 import pe.edu.unmsm.sistemas.domain.ProgramaPresupuestoDetalle;
 import pe.edu.unmsm.sistemas.domain.ProgramacionPago;
+import pe.edu.unmsm.sistemas.dto.ProgramaPresupuestoDto;
 import pe.edu.unmsm.sistemas.dto.ProgramaPresupuestoWithDetalleDto;
 import pe.edu.unmsm.sistemas.repository.ProgramaPresupuestoRepository;
 import pe.edu.unmsm.sistemas.service.ProgramaPresupuestoDetalleService;
@@ -52,14 +53,14 @@ public class ProgramaPresupuestoImpl implements ProgramaPresupuestoService {
     }
 
     @Override
-    public ProgramaPresupuesto buildProgramaPresupuesto(ProgramaPresupuestoWithDetalleDto programaPresupuestoWithDetalleDto) {
-        Programa programa = programaService.getProgramaById(programaPresupuestoWithDetalleDto.idPrograma);
-        ProgramacionPago programacionPago = programacionPagoService.getProgramacionPagoById(programaPresupuestoWithDetalleDto.idProgramacionPago);
+    public ProgramaPresupuesto buildProgramaPresupuesto(ProgramaPresupuestoDto programaPresupuestoDto) {
+        Programa programa = programaService.getProgramaById(programaPresupuestoDto.idPrograma);
+        ProgramacionPago programacionPago = programacionPagoService.getProgramacionPagoById(programaPresupuestoDto.idProgramacionPago);
         ProgramaPresupuesto programaPresupuesto = new ProgramaPresupuesto();
         programaPresupuesto.setPrograma(programa);
         programaPresupuesto.setProgramacionPago(programacionPago);
-        programaPresupuesto.setCostoCredito(programaPresupuestoWithDetalleDto.costoCredito);
-        programaPresupuesto.setCostoTotal(programaPresupuestoWithDetalleDto.costoTotal);
+        programaPresupuesto.setCostoCredito(programaPresupuestoDto.costoCredito);
+        programaPresupuesto.setCostoTotal(programaPresupuestoDto.costoTotal);
         return programaPresupuesto;
     }
 
@@ -69,13 +70,9 @@ public class ProgramaPresupuestoImpl implements ProgramaPresupuestoService {
     }
 
     @Override
-    public ProgramaPresupuesto createOrGetProgramPresupuesto(ProgramaPresupuesto programaPresupuesto) {
-        Optional<ProgramaPresupuesto> programaPresupuestoOptional = programaPresupuestoRepository.findById(programaPresupuesto.getId());
-        if (programaPresupuestoOptional.isPresent()) {
-            return programaPresupuestoOptional.get();
-        } else {
-            return programaPresupuestoRepository.save(programaPresupuesto);
-        }
+    public ProgramaPresupuesto createOrGetProgramPresupuesto(ProgramaPresupuestoDto programaPresupuestoDto) {
+        ProgramaPresupuesto programaPresupuesto = buildProgramaPresupuesto(programaPresupuestoDto);
+        return programaPresupuestoRepository.save(programaPresupuesto);
     }
 
     @Override

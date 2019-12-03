@@ -2,6 +2,7 @@ package pe.edu.unmsm.sistemas.service;
 
 import pe.edu.unmsm.sistemas.domain.ProgramaPresupuesto;
 import pe.edu.unmsm.sistemas.domain.ProgramaPresupuestoDetalle;
+import pe.edu.unmsm.sistemas.dto.ProgramaPresupuestoDto;
 import pe.edu.unmsm.sistemas.dto.ProgramaPresupuestoWithDetalleDto;
 
 import java.util.List;
@@ -13,11 +14,11 @@ public interface ProgramaPresupuestoService {
 
     ProgramaPresupuesto getProgramaPresupuesto(Integer id);
 
-    ProgramaPresupuesto buildProgramaPresupuesto(ProgramaPresupuestoWithDetalleDto programaPresupuestoWithDetalleDto);
+    ProgramaPresupuesto buildProgramaPresupuesto(ProgramaPresupuestoDto programaPresupuestoDto);
 
     ProgramaPresupuesto saveProgramaPresupuesto(ProgramaPresupuesto programaPresupuesto);
 
-    ProgramaPresupuesto createOrGetProgramPresupuesto(ProgramaPresupuesto programaPresupuesto);
+    ProgramaPresupuesto createOrGetProgramPresupuesto(ProgramaPresupuestoDto programaPresupuestoDto);
 
     ProgramaPresupuestoDetalle addProgramaPresupuestoDetalle(Integer id, ProgramaPresupuestoWithDetalleDto programaPresupuestoDetalle);
 
