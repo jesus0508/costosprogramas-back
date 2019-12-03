@@ -4,6 +4,7 @@ import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Service;
 import pe.edu.unmsm.sistemas.domain.*;
 import pe.edu.unmsm.sistemas.dto.ProgramaPresupuestoDetalleDto;
+import pe.edu.unmsm.sistemas.dto.ProgramaPresupuestoDto;
 import pe.edu.unmsm.sistemas.dto.ProgramaPresupuestoWithDetalleDto;
 import pe.edu.unmsm.sistemas.repository.ProgramaPresupuestoDetalleRepository;
 import pe.edu.unmsm.sistemas.service.ConceptoService;
@@ -38,8 +39,9 @@ public class ProgramaPresupuestoDetalleServiceImpl implements ProgramaPresupuest
 
     @Override
     public ProgramaPresupuestoDetalle buildProgramaPresupuestoDetalle(ProgramaPresupuestoWithDetalleDto programaPresupuestoWithDetalleDto) {
+        ProgramaPresupuestoDto programaPresupuestoDto = new ProgramaPresupuestoDto(programaPresupuestoWithDetalleDto);
 
-        ProgramaPresupuesto programaPresupuesto = programaPresupuestoService.buildProgramaPresupuesto(programaPresupuestoWithDetalleDto);
+        ProgramaPresupuesto programaPresupuesto = programaPresupuestoService.buildProgramaPresupuesto(programaPresupuestoDto);
         Concepto concepto = conceptoService.getConceptoById(programaPresupuestoWithDetalleDto.idConcepto);
         ProgramaCiclo programaCiclo = programaCicloService.getProgramaCicloById(programaPresupuestoWithDetalleDto.idProgramaCiclo);
 
