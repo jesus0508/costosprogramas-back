@@ -1,5 +1,7 @@
 package pe.edu.unmsm.sistemas.domain;
 
+import com.fasterxml.jackson.annotation.JsonProperty;
+
 import javax.persistence.*;
 import java.util.List;
 
@@ -7,6 +9,7 @@ import java.util.List;
 public class ProgramaPresupuesto {
 
     @Id
+    @JsonProperty(access = JsonProperty.Access.READ_ONLY)
     @Column(name = "id_programa_presupuesto")
     @GeneratedValue(strategy = GenerationType.AUTO)
     private Integer id;
