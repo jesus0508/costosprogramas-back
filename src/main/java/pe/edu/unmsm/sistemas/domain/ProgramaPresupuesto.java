@@ -86,6 +86,10 @@ public class ProgramaPresupuesto {
         this.costoTotal = costoTotal;
     }
 
+    public Long calcularCostoTotal(Long importe) {
+        return this.costoTotal += importe;
+    }
+
     @Override
     public String toString() {
         return "ProgramaPresupuesto{" +

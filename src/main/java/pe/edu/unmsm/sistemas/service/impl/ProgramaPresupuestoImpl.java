@@ -8,8 +8,8 @@ import pe.edu.unmsm.sistemas.domain.Programa;
 import pe.edu.unmsm.sistemas.domain.ProgramaPresupuesto;
 import pe.edu.unmsm.sistemas.domain.ProgramaPresupuestoDetalle;
 import pe.edu.unmsm.sistemas.domain.ProgramacionPago;
+import pe.edu.unmsm.sistemas.dto.ProgramaPresupuestoDetalleDto;
 import pe.edu.unmsm.sistemas.dto.ProgramaPresupuestoDto;
-import pe.edu.unmsm.sistemas.dto.ProgramaPresupuestoWithDetalleDto;
 import pe.edu.unmsm.sistemas.repository.ProgramaPresupuestoRepository;
 import pe.edu.unmsm.sistemas.service.ProgramaPresupuestoDetalleService;
 import pe.edu.unmsm.sistemas.service.ProgramaPresupuestoService;
@@ -18,7 +18,6 @@ import pe.edu.unmsm.sistemas.service.ProgramacionPagoService;
 
 import java.util.LinkedList;
 import java.util.List;
-import java.util.Optional;
 
 @Service
 public class ProgramaPresupuestoImpl implements ProgramaPresupuestoService {
@@ -70,37 +69,36 @@ public class ProgramaPresupuestoImpl implements ProgramaPresupuestoService {
     }
 
     @Override
-    public ProgramaPresupuesto createOrGetProgramPresupuesto(ProgramaPresupuestoDto programaPresupuestoDto) {
-        ProgramaPresupuesto programaPresupuesto = buildProgramaPresupuesto(programaPresupuestoDto);
-        return programaPresupuestoRepository.save(programaPresupuesto);
-    }
-
-    @Override
     public ProgramaPresupuestoDetalle addProgramaPresupuestoDetalle(
-            Integer id, ProgramaPresupuestoWithDetalleDto programaPresupuestoWithDetalleDto) {
+            Integer id, ProgramaPresupuestoDetalleDto programaPresupuestoDetalleDto) {
 
         ProgramaPresupuesto programaPresupuesto = getProgramaPresupuesto(id);
-        ProgramaPresupuestoDetalle programaPresupuestoDetalle = programaPresupuestoDetalleService.buildProgramaPresupuestoDetalle(programaPresupuestoWithDetalleDto);
+        ProgramaPresupuestoDetalle programaPresupuestoDetalle = programaPresupuestoDetalleService.buildProgramaPresupuestoDetalle(programaPresupuestoDetalleDto);
+        programaPresupuestoDetalle.calcularImporte(programaPresupuesto.getCostoCredito());
         programaPresupuestoDetalle.setProgramaPresupuesto(programaPresupuesto);
         programaPresupuesto.getProgramaPresupuestoDetalles().add(programaPresupuestoDetalle);
-        Long costoTotal = programaPresupuesto.getCostoTotal() + programaPresupuestoDetalle.getImporte().longValue();
-        programaPresupuesto.setCostoTotal(costoTotal);
+        programaPresupuesto.calcularCostoTotal(programaPresupuestoDetalle.getImporte().longValue());
         programaPresupuestoRepository.save(programaPresupuesto);
         logger.info("Programa Presupuesto= " + programaPresupuestoDetalle);
         return programaPresupuestoDetalle;
     }
 
     @Override
-    public ProgramaPresupuesto updateProgramaPresupuesto(ProgramaPresupuesto programaPresupuesto) {
+    public ProgramaPresupuesto updateProgramaPresupuesto(Integer id, ProgramaPresupuesto programaPresupuesto) {
+        programaPresupuesto.setId(id);
+        ProgramaPresupuesto newProgramaPresupuesto = programaPresupuestoRepository.save(programaPresupuesto);
+
         List<ProgramaPresupuestoDetalle> programaPresupuestoDetalles = new LinkedList<>();
         Double newCostoCredito = programaPresupuesto.getCostoCredito().doubleValue();
-        programaPresupuesto.getProgramaPresupuestoDetalles().forEach((programaPresupuestoDetalle) -> {
+
+        newProgramaPresupuesto.getProgramaPresupuestoDetalles().forEach((programaPresupuestoDetalle) -> {
             programaPresupuestoDetalle.setImporte(newCostoCredito * programaPresupuestoDetalle.getCredito());
-            programaPresupuestoDetalle.setProgramaPresupuesto(programaPresupuesto);
+            programaPresupuestoDetalle.setProgramaPresupuesto(newProgramaPresupuesto);
             programaPresupuestoDetalles.add(programaPresupuestoDetalle);
         });
         programaPresupuesto.setProgramaPresupuestoDetalles(programaPresupuestoDetalles);
-        return programaPresupuesto;
+
+        return programaPresupuestoRepository.save(programaPresupuesto);
     }
 
 }

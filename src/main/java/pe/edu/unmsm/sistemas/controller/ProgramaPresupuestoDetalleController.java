@@ -7,6 +7,7 @@ import org.springframework.http.ResponseEntity;
 import org.springframework.web.bind.annotation.*;
 import pe.edu.unmsm.sistemas.domain.ProgramaPresupuestoDetalle;
 import pe.edu.unmsm.sistemas.domain.ProgramaPresupuestoDetalleId;
+import pe.edu.unmsm.sistemas.dto.ProgramaPresupuestoDetalleDto;
 import pe.edu.unmsm.sistemas.dto.ProgramaPresupuestoWithDetalleDto;
 import pe.edu.unmsm.sistemas.service.ProgramaPresupuestoDetalleService;
 
@@ -14,7 +15,7 @@ import pe.edu.unmsm.sistemas.service.ProgramaPresupuestoDetalleService;
 @RestController
 @CrossOrigin
 @Api(tags = "Programa Presupuesto Detalle")
-@RequestMapping("programa-presupuesto-detalle")
+@RequestMapping("presupuesto-detalles")
 public class ProgramaPresupuestoDetalleController {
 
     @Autowired
@@ -32,9 +33,9 @@ public class ProgramaPresupuestoDetalleController {
     @PutMapping("/{id}")
     public ResponseEntity<ProgramaPresupuestoDetalle> updateProgramaPresupuestoDetalle(
             @PathVariable Integer id,
-            @RequestBody ProgramaPresupuestoWithDetalleDto programaPresupuestoWithDetalleDto) {
+            @RequestBody ProgramaPresupuestoDetalleDto programaPresupuestoDetalleDto) {
 
-        ProgramaPresupuestoDetalle programaPresupuestoDetalle = programaPresupuestoDetalleService.buildProgramaPresupuestoDetalle(programaPresupuestoWithDetalleDto);
+        ProgramaPresupuestoDetalle programaPresupuestoDetalle = programaPresupuestoDetalleService.buildProgramaPresupuestoDetalle(programaPresupuestoDetalleDto);
         programaPresupuestoDetalle = programaPresupuestoDetalleService.saveProgramPresupuestoDetalle(programaPresupuestoDetalle);
         return new ResponseEntity<>(programaPresupuestoDetalle, HttpStatus.OK);
     }

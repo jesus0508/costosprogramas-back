@@ -79,4 +79,8 @@ public class ProgramaPresupuestoDetalle {
         this.cuotas = cuotas;
     }
 
+    public Double calcularImporte(Integer costoCredito) {
+        this.importe = getCuotas() * costoCredito.doubleValue();
+        return this.importe;
+    }
 }

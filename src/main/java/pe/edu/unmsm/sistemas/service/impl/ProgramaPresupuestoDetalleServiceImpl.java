@@ -4,7 +4,6 @@ import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Service;
 import pe.edu.unmsm.sistemas.domain.*;
 import pe.edu.unmsm.sistemas.dto.ProgramaPresupuestoDetalleDto;
-import pe.edu.unmsm.sistemas.dto.ProgramaPresupuestoDto;
 import pe.edu.unmsm.sistemas.dto.ProgramaPresupuestoWithDetalleDto;
 import pe.edu.unmsm.sistemas.repository.ProgramaPresupuestoDetalleRepository;
 import pe.edu.unmsm.sistemas.service.ConceptoService;
@@ -38,12 +37,28 @@ public class ProgramaPresupuestoDetalleServiceImpl implements ProgramaPresupuest
     }
 
     @Override
-    public ProgramaPresupuestoDetalle buildProgramaPresupuestoDetalle(ProgramaPresupuestoWithDetalleDto programaPresupuestoWithDetalleDto) {
-        ProgramaPresupuestoDto programaPresupuestoDto = new ProgramaPresupuestoDto(programaPresupuestoWithDetalleDto);
+    public ProgramaPresupuestoDetalle buildProgramaPresupuestoDetalle(
+            ProgramaPresupuestoDetalleDto programaPresupuestoDetalleDto) {
 
-        ProgramaPresupuesto programaPresupuesto = programaPresupuestoService.buildProgramaPresupuesto(programaPresupuestoDto);
+        Concepto concepto = conceptoService.getConceptoById(programaPresupuestoDetalleDto.idConcepto);
+        ProgramaCiclo programaCiclo = programaCicloService.getProgramaCicloById(programaPresupuestoDetalleDto.idProgramaCiclo);
+
+        ProgramaPresupuestoDetalle programaPresupuestoDetalle = new ProgramaPresupuestoDetalle();
+        programaPresupuestoDetalle.setConcepto(concepto);
+        programaPresupuestoDetalle.setProgramaCiclo(programaCiclo);
+        programaPresupuestoDetalle.setCredito(programaPresupuestoDetalleDto.credito);
+        programaPresupuestoDetalle.setCuotas(programaPresupuestoDetalleDto.cuotas);
+        programaPresupuestoDetalle.setImporte(programaPresupuestoDetalleDto.importe);
+        return programaPresupuestoDetalle;
+    }
+
+    @Override
+    public ProgramaPresupuestoDetalle buildProgramaPresupuestoDetalle(
+            ProgramaPresupuestoWithDetalleDto programaPresupuestoWithDetalleDto) {
+
         Concepto concepto = conceptoService.getConceptoById(programaPresupuestoWithDetalleDto.idConcepto);
         ProgramaCiclo programaCiclo = programaCicloService.getProgramaCicloById(programaPresupuestoWithDetalleDto.idProgramaCiclo);
+        ProgramaPresupuesto programaPresupuesto = programaPresupuestoService.getProgramaPresupuesto(programaPresupuestoWithDetalleDto.id);
 
         ProgramaPresupuestoDetalle programaPresupuestoDetalle = new ProgramaPresupuestoDetalle();
         programaPresupuestoDetalle.setProgramaPresupuesto(programaPresupuesto);
@@ -54,6 +69,7 @@ public class ProgramaPresupuestoDetalleServiceImpl implements ProgramaPresupuest
         programaPresupuestoDetalle.setImporte(programaPresupuestoWithDetalleDto.importe);
         return programaPresupuestoDetalle;
     }
+
 
     @Override
     public ProgramaPresupuestoDetalle saveProgramPresupuestoDetalle(ProgramaPresupuestoDetalle programaPresupuestoDetalle) {

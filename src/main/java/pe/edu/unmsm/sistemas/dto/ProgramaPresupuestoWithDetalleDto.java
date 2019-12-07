@@ -5,7 +5,7 @@ import com.fasterxml.jackson.annotation.JsonProperty;
 
 public class ProgramaPresupuestoWithDetalleDto {
 
-    @JsonProperty("id_programa_presupuesto_det")
+    @JsonProperty("id_programa_presupuesto")
     public Integer id;
     @JsonProperty("id_programa")
     public Short idPrograma;

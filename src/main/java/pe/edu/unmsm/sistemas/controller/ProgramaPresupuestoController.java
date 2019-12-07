@@ -6,11 +6,10 @@ import org.springframework.http.HttpStatus;
 import org.springframework.http.MediaType;
 import org.springframework.http.ResponseEntity;
 import org.springframework.web.bind.annotation.*;
-import pe.edu.unmsm.sistemas.domain.Programa;
 import pe.edu.unmsm.sistemas.domain.ProgramaPresupuesto;
 import pe.edu.unmsm.sistemas.domain.ProgramaPresupuestoDetalle;
+import pe.edu.unmsm.sistemas.dto.ProgramaPresupuestoDetalleDto;
 import pe.edu.unmsm.sistemas.dto.ProgramaPresupuestoDto;
-import pe.edu.unmsm.sistemas.dto.ProgramaPresupuestoWithDetalleDto;
 import pe.edu.unmsm.sistemas.service.ProgramaPresupuestoService;
 
 import java.util.List;
@@ -43,25 +42,25 @@ public class ProgramaPresupuestoController {
     @PostMapping
     public ResponseEntity<ProgramaPresupuesto> createProgramaPresupuesto(
             @RequestBody ProgramaPresupuestoDto programaPresupuestoDto) {
-
-        ProgramaPresupuesto programaPresupuesto = programaPresupuestoService.createOrGetProgramPresupuesto(programaPresupuestoDto);
+        ProgramaPresupuesto programaPresupuesto = programaPresupuestoService.buildProgramaPresupuesto(programaPresupuestoDto);
+        programaPresupuesto = programaPresupuestoService.saveProgramaPresupuesto(programaPresupuesto);
         return new ResponseEntity<>(programaPresupuesto, HttpStatus.CREATED);
     }
 
-    @PutMapping("/{id}/detalle")
+    @PostMapping("/{id}/detalle")
     public ResponseEntity<ProgramaPresupuestoDetalle> addProgramaPresupuestoDetalle(
             @PathVariable Integer id,
-            @RequestBody ProgramaPresupuestoWithDetalleDto programaPresupuestoWithDetalleDto) {
+            @RequestBody ProgramaPresupuestoDetalleDto programaPresupuestoDetalleDto) {
 
-        ProgramaPresupuestoDetalle programaPresupuesto = programaPresupuestoService.addProgramaPresupuestoDetalle(id, programaPresupuestoWithDetalleDto);
-        return new ResponseEntity<>(programaPresupuesto, HttpStatus.CREATED);
+        ProgramaPresupuestoDetalle programaPresupuestoDetalle = programaPresupuestoService.addProgramaPresupuestoDetalle(id, programaPresupuestoDetalleDto);
+        return new ResponseEntity<>(programaPresupuestoDetalle, HttpStatus.CREATED);
     }
 
     @PutMapping("/{id}")
     public ResponseEntity<ProgramaPresupuesto> updateProgramaPresupuesto(
-            @PathVariable Integer id, @RequestBody ProgramaPresupuesto programaPresupuesto) {
-
-        programaPresupuesto = programaPresupuestoService.saveProgramaPresupuesto(programaPresupuesto);
+            @PathVariable Integer id, @RequestBody ProgramaPresupuestoDto programaPresupuestoDto) {
+        ProgramaPresupuesto programaPresupuesto = programaPresupuestoService.buildProgramaPresupuesto(programaPresupuestoDto);
+        programaPresupuesto = programaPresupuestoService.updateProgramaPresupuesto(id, programaPresupuesto);
         return new ResponseEntity<>(programaPresupuesto, HttpStatus.OK);
     }
 }
