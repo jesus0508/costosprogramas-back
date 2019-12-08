@@ -63,4 +63,10 @@ public class ProgramaPresupuestoController {
         programaPresupuesto = programaPresupuestoService.updateProgramaPresupuesto(id, programaPresupuesto);
         return new ResponseEntity<>(programaPresupuesto, HttpStatus.OK);
     }
+
+    @DeleteMapping("/{id}")
+    public ResponseEntity<Integer> deleteProgramaPresupuesto(@PathVariable Integer id){
+        Integer deleted = programaPresupuestoService.deleteProgramaPresupuesto(id);
+        return new ResponseEntity<>(deleted, HttpStatus.OK);
+    }
 }

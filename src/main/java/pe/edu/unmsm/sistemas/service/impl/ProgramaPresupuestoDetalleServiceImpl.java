@@ -73,6 +73,7 @@ public class ProgramaPresupuestoDetalleServiceImpl implements ProgramaPresupuest
 
     @Override
     public ProgramaPresupuestoDetalle saveProgramPresupuestoDetalle(ProgramaPresupuestoDetalle programaPresupuestoDetalle) {
+        programaPresupuestoDetalle.getProgramaPresupuesto().calcularCostoTotal(programaPresupuestoDetalle.getImporte().longValue());
         return programaPresupuestoDetalleRepository.save(programaPresupuestoDetalle);
     }
 
@@ -101,9 +102,16 @@ public class ProgramaPresupuestoDetalleServiceImpl implements ProgramaPresupuest
         programaPresupuestoDetalle.setCuotas(newProgramaPresupuestoDetalle.getCuotas());
         ProgramaPresupuesto programaPresupuesto = programaPresupuestoDetalle.getProgramaPresupuesto();
 
-        Long importe = programaPresupuestoDetalle.getImporte().longValue();
-        Long newImporte = programaPresupuestoDetalle.calcularImporte(programaPresupuesto.getCostoCredito()).longValue();
-        programaPresupuesto.calcularCostoTotal(newImporte - importe);
+        Double importe = programaPresupuestoDetalle.getImporte();
+        Double newImporte;
+
+        if (programaPresupuestoDetalle.getCredito() > 0) {
+            newImporte = programaPresupuestoDetalle.calcularImporte(programaPresupuesto.getCostoCredito());
+        } else {
+            newImporte = newProgramaPresupuestoDetalle.getImporte();
+        }
+        programaPresupuestoDetalle.setImporte(newImporte);
+        programaPresupuesto.calcularCostoTotal(newImporte.longValue() - importe.longValue());
 
         programaPresupuestoService.saveProgramaPresupuesto(programaPresupuesto);
         return programaPresupuestoDetalle;

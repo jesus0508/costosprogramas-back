@@ -74,7 +74,8 @@ public class ProgramaPresupuestoImpl implements ProgramaPresupuestoService {
 
         ProgramaPresupuesto programaPresupuesto = getProgramaPresupuesto(id);
         ProgramaPresupuestoDetalle programaPresupuestoDetalle = programaPresupuestoDetalleService.buildProgramaPresupuestoDetalle(programaPresupuestoDetalleDto);
-        programaPresupuestoDetalle.calcularImporte(programaPresupuesto.getCostoCredito());
+        //programaPresupuestoDetalle.calcularImporte(programaPresupuesto.getCostoCredito());
+        programaPresupuestoDetalle.setImporte(programaPresupuestoDetalleDto.importe);
         programaPresupuestoDetalle.setProgramaPresupuesto(programaPresupuesto);
         programaPresupuesto.getProgramaPresupuestoDetalles().add(programaPresupuestoDetalle);
         programaPresupuesto.calcularCostoTotal(programaPresupuestoDetalle.getImporte().longValue());
@@ -90,15 +91,23 @@ public class ProgramaPresupuestoImpl implements ProgramaPresupuestoService {
         logger.info("Programa Presupuesto= " + programaPresupuesto);
         List<ProgramaPresupuestoDetalle> programaPresupuestoDetalles = new LinkedList<>();
         Double newCostoCredito = programaPresupuesto.getCostoCredito().doubleValue();
-
         programaPresupuesto.getProgramaPresupuestoDetalles().forEach((programaPresupuestoDetalle) -> {
-            programaPresupuestoDetalle.setImporte(newCostoCredito * programaPresupuestoDetalle.getCredito());
+            if (programaPresupuestoDetalle.getCredito() > 0) {
+                programaPresupuestoDetalle.setImporte(newCostoCredito * programaPresupuestoDetalle.getCredito());
+            }
             programaPresupuestoDetalle.setProgramaPresupuesto(programaPresupuesto);
             programaPresupuestoDetalles.add(programaPresupuestoDetalle);
         });
+        double newCostoTotal = programaPresupuestoDetalles.stream().mapToDouble(ProgramaPresupuestoDetalle::getImporte).sum();
+        programaPresupuesto.setCostoTotal((long) newCostoTotal);
         programaPresupuesto.setProgramaPresupuestoDetalles(programaPresupuestoDetalles);
-
         return programaPresupuestoRepository.save(programaPresupuesto);
+    }
+
+    @Override
+    public Integer deleteProgramaPresupuesto(Integer id) {
+        programaPresupuestoRepository.deleteById(id);
+        return id;
     }
 
 }

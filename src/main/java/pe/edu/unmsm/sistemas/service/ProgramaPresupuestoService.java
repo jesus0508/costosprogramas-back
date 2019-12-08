@@ -21,4 +21,6 @@ public interface ProgramaPresupuestoService {
     ProgramaPresupuestoDetalle addProgramaPresupuestoDetalle(Integer id, ProgramaPresupuestoDetalleDto programaPresupuestoDetalle);
 
     ProgramaPresupuesto updateProgramaPresupuesto(Integer id, ProgramaPresupuesto programaPresupuesto);
+
+    Integer deleteProgramaPresupuesto(Integer id);
 }
