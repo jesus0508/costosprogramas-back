@@ -39,6 +39,12 @@ public class ProgramaPresupuestoController {
         return new ResponseEntity<>(programaPresupuestos, HttpStatus.OK);
     }
 
+    @GetMapping("/{id}")
+    public  ResponseEntity<ProgramaPresupuesto> getProgramaPresupuesto(@PathVariable Integer id){
+        ProgramaPresupuesto programaPresupuesto = programaPresupuestoService.getProgramaPresupuesto(id);
+        return new ResponseEntity<>(programaPresupuesto, HttpStatus.OK);
+    }
+
     @PostMapping
     public ResponseEntity<ProgramaPresupuesto> createProgramaPresupuesto(
             @RequestBody ProgramaPresupuestoDto programaPresupuestoDto) {
