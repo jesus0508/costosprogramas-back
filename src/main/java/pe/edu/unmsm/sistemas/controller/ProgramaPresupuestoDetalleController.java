@@ -30,17 +30,20 @@ public class ProgramaPresupuestoDetalleController {
         return new ResponseEntity<>(programaPresupuestoDetalle, HttpStatus.CREATED);
     }
 
-    @PutMapping("/{id}")
+    @PutMapping
     public ResponseEntity<ProgramaPresupuestoDetalle> updateProgramaPresupuestoDetalle(
-            @PathVariable Integer id,
+            @RequestParam(name = "id-presupuesto") Integer idProgramaPresupuesto,
+            @RequestParam(name = "id-concepto") Short idConcepto,
+            @RequestParam(name = "id-ciclo") Integer idProgramaCiclo,
             @RequestBody ProgramaPresupuestoDetalleDto programaPresupuestoDetalleDto) {
 
         ProgramaPresupuestoDetalle programaPresupuestoDetalle = programaPresupuestoDetalleService.buildProgramaPresupuestoDetalle(programaPresupuestoDetalleDto);
-        programaPresupuestoDetalle = programaPresupuestoDetalleService.saveProgramPresupuestoDetalle(programaPresupuestoDetalle);
+        ProgramaPresupuestoDetalleId programaPresupuestoDetalleId = new ProgramaPresupuestoDetalleId(idProgramaPresupuesto, idConcepto, idProgramaCiclo);
+        programaPresupuestoDetalle = programaPresupuestoDetalleService.updateProgramaPresupuestoDetalle(programaPresupuestoDetalleId, programaPresupuestoDetalle);
         return new ResponseEntity<>(programaPresupuestoDetalle, HttpStatus.OK);
     }
 
-    @DeleteMapping("/")
+    @DeleteMapping
     public ResponseEntity<ProgramaPresupuestoDetalleId> deleteProgramaPresupuestoDetalle(
             @RequestParam(name = "id-presupuesto") Integer idProgramaPresupuesto,
             @RequestParam(name = "id-concepto") Short idConcepto,
@@ -49,6 +52,17 @@ public class ProgramaPresupuestoDetalleController {
         ProgramaPresupuestoDetalleId programaPresupuestoDetalleId = new ProgramaPresupuestoDetalleId(idProgramaPresupuesto, idConcepto, idProgramaCiclo);
         programaPresupuestoDetalleId = programaPresupuestoDetalleService.deleteProgramaPresupuestoDetalle(programaPresupuestoDetalleId);
         return new ResponseEntity<>(programaPresupuestoDetalleId, HttpStatus.OK);
+    }
+
+    @GetMapping
+    public ResponseEntity<ProgramaPresupuestoDetalle> getProgramaPresupuestoDetalle(
+            @RequestParam(name = "id-presupuesto") Integer idProgramaPresupuesto,
+            @RequestParam(name = "id-concepto") Short idConcepto,
+            @RequestParam(name = "id-ciclo") Integer idProgramaCiclo) {
+
+        ProgramaPresupuestoDetalleId programaPresupuestoDetalleId = new ProgramaPresupuestoDetalleId(idProgramaPresupuesto, idConcepto, idProgramaCiclo);
+        ProgramaPresupuestoDetalle programaPresupuestoDetalle = programaPresupuestoDetalleService.getProgramaPresupuestoDetalle(programaPresupuestoDetalleId);
+        return new ResponseEntity<>(programaPresupuestoDetalle, HttpStatus.OK);
 
     }
 }

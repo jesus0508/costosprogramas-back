@@ -78,8 +78,35 @@ public class ProgramaPresupuestoDetalleServiceImpl implements ProgramaPresupuest
 
     @Override
     public ProgramaPresupuestoDetalleId deleteProgramaPresupuestoDetalle(ProgramaPresupuestoDetalleId programaPresupuestoDetalleId) {
-        programaPresupuestoDetalleRepository.deleteById(programaPresupuestoDetalleId);
+        ProgramaPresupuestoDetalle programaPresupuestoDetalle = getProgramaPresupuestoDetalle(programaPresupuestoDetalleId);
+        ProgramaPresupuesto programaPresupuesto = programaPresupuestoDetalle.getProgramaPresupuesto();
+        programaPresupuesto.getProgramaPresupuestoDetalles().remove(programaPresupuestoDetalle);
+        programaPresupuesto.calcularCostoTotal(programaPresupuestoDetalle.getImporte().longValue() * (-1));
+        programaPresupuestoService.saveProgramaPresupuesto(programaPresupuesto);
+        programaPresupuestoDetalleRepository.delete(programaPresupuestoDetalle);
         return programaPresupuestoDetalleId;
+    }
+
+    @Override
+    public ProgramaPresupuestoDetalle getProgramaPresupuestoDetalle(ProgramaPresupuestoDetalleId programaPresupuestoDetalleId) {
+        return programaPresupuestoDetalleRepository.findById(programaPresupuestoDetalleId).orElseThrow(RuntimeException::new);
+    }
+
+    @Override
+    public ProgramaPresupuestoDetalle updateProgramaPresupuestoDetalle(
+            ProgramaPresupuestoDetalleId programaPresupuestoDetalleId, ProgramaPresupuestoDetalle newProgramaPresupuestoDetalle) {
+
+        ProgramaPresupuestoDetalle programaPresupuestoDetalle = getProgramaPresupuestoDetalle(programaPresupuestoDetalleId);
+        programaPresupuestoDetalle.setCredito(newProgramaPresupuestoDetalle.getCredito());
+        programaPresupuestoDetalle.setCuotas(newProgramaPresupuestoDetalle.getCuotas());
+        ProgramaPresupuesto programaPresupuesto = programaPresupuestoDetalle.getProgramaPresupuesto();
+
+        Long importe = programaPresupuestoDetalle.getImporte().longValue();
+        Long newImporte = programaPresupuestoDetalle.calcularImporte(programaPresupuesto.getCostoCredito()).longValue();
+        programaPresupuesto.calcularCostoTotal(newImporte - importe);
+
+        programaPresupuestoService.saveProgramaPresupuesto(programaPresupuesto);
+        return programaPresupuestoDetalle;
     }
 
 }

@@ -56,7 +56,7 @@ public class ProgramaPresupuestoController {
         return new ResponseEntity<>(programaPresupuestoDetalle, HttpStatus.CREATED);
     }
 
-    @PutMapping("/{id}")
+    @PatchMapping("/{id}")
     public ResponseEntity<ProgramaPresupuesto> updateProgramaPresupuesto(
             @PathVariable Integer id, @RequestBody ProgramaPresupuestoDto programaPresupuestoDto) {
         ProgramaPresupuesto programaPresupuesto = programaPresupuestoService.buildProgramaPresupuesto(programaPresupuestoDto);

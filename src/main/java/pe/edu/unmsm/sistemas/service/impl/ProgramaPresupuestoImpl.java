@@ -78,22 +78,22 @@ public class ProgramaPresupuestoImpl implements ProgramaPresupuestoService {
         programaPresupuestoDetalle.setProgramaPresupuesto(programaPresupuesto);
         programaPresupuesto.getProgramaPresupuestoDetalles().add(programaPresupuestoDetalle);
         programaPresupuesto.calcularCostoTotal(programaPresupuestoDetalle.getImporte().longValue());
-        programaPresupuestoRepository.save(programaPresupuesto);
         logger.info("Programa Presupuesto= " + programaPresupuestoDetalle);
+        programaPresupuestoRepository.save(programaPresupuesto);
         return programaPresupuestoDetalle;
     }
 
     @Override
-    public ProgramaPresupuesto updateProgramaPresupuesto(Integer id, ProgramaPresupuesto programaPresupuesto) {
-        programaPresupuesto.setId(id);
-        ProgramaPresupuesto newProgramaPresupuesto = programaPresupuestoRepository.save(programaPresupuesto);
-
+    public ProgramaPresupuesto updateProgramaPresupuesto(Integer id, ProgramaPresupuesto newProgramaPresupuesto) {
+        ProgramaPresupuesto programaPresupuesto = getProgramaPresupuesto(id);
+        programaPresupuesto.setCostoCredito(newProgramaPresupuesto.getCostoCredito());
+        logger.info("Programa Presupuesto= " + programaPresupuesto);
         List<ProgramaPresupuestoDetalle> programaPresupuestoDetalles = new LinkedList<>();
         Double newCostoCredito = programaPresupuesto.getCostoCredito().doubleValue();
 
-        newProgramaPresupuesto.getProgramaPresupuestoDetalles().forEach((programaPresupuestoDetalle) -> {
+        programaPresupuesto.getProgramaPresupuestoDetalles().forEach((programaPresupuestoDetalle) -> {
             programaPresupuestoDetalle.setImporte(newCostoCredito * programaPresupuestoDetalle.getCredito());
-            programaPresupuestoDetalle.setProgramaPresupuesto(newProgramaPresupuesto);
+            programaPresupuestoDetalle.setProgramaPresupuesto(programaPresupuesto);
             programaPresupuestoDetalles.add(programaPresupuestoDetalle);
         });
         programaPresupuesto.setProgramaPresupuestoDetalles(programaPresupuestoDetalles);

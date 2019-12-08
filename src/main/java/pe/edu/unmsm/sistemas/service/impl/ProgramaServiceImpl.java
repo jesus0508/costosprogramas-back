@@ -23,6 +23,6 @@ public class ProgramaServiceImpl implements ProgramaService {
 
     @Override
     public Programa getProgramaById(Short id) {
-        return programaRepository.findById(id).orElseThrow(() -> new RuntimeException());
+        return programaRepository.findById(id).orElseThrow(RuntimeException::new);
     }
 }

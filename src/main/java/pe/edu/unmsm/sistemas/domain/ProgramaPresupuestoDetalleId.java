@@ -1,6 +1,7 @@
 package pe.edu.unmsm.sistemas.domain;
 
 import java.io.Serializable;
+import java.util.Objects;
 
 public class ProgramaPresupuestoDetalleId implements Serializable {
 
@@ -39,6 +40,16 @@ public class ProgramaPresupuestoDetalleId implements Serializable {
 
     public void setProgramaCiclo(Integer programaCiclo) {
         this.programaCiclo = programaCiclo;
+    }
+
+    @Override
+    public boolean equals(Object o) {
+        if (this == o) return true;
+        if (o == null || getClass() != o.getClass()) return false;
+        ProgramaPresupuestoDetalleId that = (ProgramaPresupuestoDetalleId) o;
+        return Objects.equals(programaPresupuesto, that.programaPresupuesto) &&
+                Objects.equals(concepto, that.concepto) &&
+                Objects.equals(programaCiclo, that.programaCiclo);
     }
 
     @Override

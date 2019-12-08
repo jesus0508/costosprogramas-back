@@ -1,6 +1,5 @@
 package pe.edu.unmsm.sistemas.service;
 
-import pe.edu.unmsm.sistemas.domain.ProgramaPresupuesto;
 import pe.edu.unmsm.sistemas.domain.ProgramaPresupuestoDetalle;
 import pe.edu.unmsm.sistemas.domain.ProgramaPresupuestoDetalleId;
 import pe.edu.unmsm.sistemas.dto.ProgramaPresupuestoDetalleDto;
@@ -21,5 +20,10 @@ public interface ProgramaPresupuestoDetalleService {
     ProgramaPresupuestoDetalle saveProgramPresupuestoDetalle(ProgramaPresupuestoDetalle programaPresupuestoDetalle);
 
     ProgramaPresupuestoDetalleId deleteProgramaPresupuestoDetalle(ProgramaPresupuestoDetalleId programaPresupuestoDetalleId);
+
+    ProgramaPresupuestoDetalle getProgramaPresupuestoDetalle(ProgramaPresupuestoDetalleId programaPresupuestoDetalleId);
+
+    ProgramaPresupuestoDetalle updateProgramaPresupuestoDetalle(
+            ProgramaPresupuestoDetalleId programaPresupuestoDetalleId, ProgramaPresupuestoDetalle programaPresupuestoDetalle);
 
 }

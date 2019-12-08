@@ -80,7 +80,17 @@ public class ProgramaPresupuestoDetalle {
     }
 
     public Double calcularImporte(Integer costoCredito) {
-        this.importe = getCuotas() * costoCredito.doubleValue();
-        return this.importe;
+        return this.importe = getCredito() * costoCredito.doubleValue();
+    }
+
+    @Override
+    public String toString() {
+        return "ProgramaPresupuestoDetalle{" +
+                "  concepto=" + concepto +
+                ", programaCiclo=" + programaCiclo +
+                ", credito=" + credito +
+                ", importe=" + importe +
+                ", cuotas=" + cuotas +
+                '}';
     }
 }
